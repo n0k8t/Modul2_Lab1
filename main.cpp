@@ -13,9 +13,14 @@ int intFromString(const char*  data)
 
     for(int i = ((int)strlen(data) - 1); i >= 0; i--)
     {
-        if(data[i] == '-')
-        {
-            break;
+        if(data[i] == '-' )
+        {   if( i == 0 ) 
+            {
+                break;
+            }else
+            {
+                throw WrongUnit();
+            }
         }
 
         if (isdigit(data[i]))
@@ -44,7 +49,7 @@ int intFromString(const char*  data)
     }
 
     return (int)result;
-} // int ++
+}
 
 bool boolFromString(const char *data)
 {
@@ -143,7 +148,14 @@ int main()
 {
     try
     {
-        intFromString("-3123456789");
+        try
+        {
+            intFromString("-3123456789");
+        }
+        catch (WrongUnit &e)
+        {
+            std::cout<<"It's not an int"<< std::endl;
+        }
     }
     catch (CapacityError &e)
     {
@@ -160,14 +172,21 @@ int main()
         std::cout<<"It's not a bool"<< std::endl;
     }
 
-
+    
     try
     {
-        floatFromString("0.1r23");
+        try
+        {
+            floatFromString("0.1r23");
+        }
+        catch (WrongUnit &e)
+        {
+            std::cout << "It's not a float"<< std::endl;
+        }
     }
-    catch (WrongUnit &e)
+    catch (CapacityError &e)
     {
-        std::cout << "It's not a float"<< std::endl;
+        std::cout << "Too big for float"<< std::endl;
     }
 
     return 0;
