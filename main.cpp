@@ -11,7 +11,7 @@ int intFromString(const char*  data)
     long long result = 0;
     long long digit = 1;
 
-    for(int i = ((int)strlen(data) - 1); i >= 0; i--)
+    for(int i = ((int)strlen(data)); i >= 0; i--)
     {
         if(data[i] == '-' )
         {   if( i == 0 ) 
