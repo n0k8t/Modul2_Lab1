@@ -8,8 +8,8 @@
 
 int intFromString(const char*  data)
 {
-    float result = 0;
-    float digit = 1;
+    long long result = 0;
+    long long digit = 1;
 
     for(int i = ((int)strlen(data) - 1); i >= 0; i--)
     {
@@ -44,7 +44,7 @@ int intFromString(const char*  data)
     }
 
     return (int)result;
-}// int
+} // int ++
 
 bool boolFromString(const char *data)
 {
@@ -66,13 +66,13 @@ bool boolFromString(const char *data)
         return false;
     }
     else throw WrongUnit();
-} // logic
+} // logic ==
 
 float floatFromString(const char*  data)
 {
     float result = 0;
     float digit = 1;
-    float _digit = 0.1;
+    float _digit = powf(10,-1);
     int dot = -1;
     int count = 0;
 
@@ -110,12 +110,12 @@ float floatFromString(const char*  data)
 
 
 
-    for(int i = dot + 1; i < (int)strlen(data)-1; i++)
+    for(int i = dot + 1; i < (int)strlen(data); i++)
     {
         if (isdigit(data[i]))
         {
             result = result + (_digit * float(data[i] - '0'));
-            _digit = _digit * (float)0.1;
+            _digit = _digit * powf(10,-1);
         }else
         {
             throw WrongUnit();
@@ -137,10 +137,7 @@ float floatFromString(const char*  data)
     }
 
     return result;
-}// float
-
-
-
+} // float +?
 
 int main()
 {
