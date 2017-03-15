@@ -13,8 +13,8 @@ int intFromString(const char*  data)
 
     for(int i = ((int)strlen(data) - 1); i >= 0; i--)
     {
-        if(data[i] == '-' )
-        {   if( i == 0 ) 
+        if(data[i] == '-')
+        {   if( i == 0 )
             {
                 break;
             }else
@@ -25,7 +25,7 @@ int intFromString(const char*  data)
 
         if (isdigit(data[i]))
         {
-            result = result + (digit * int(data[i] - '0'));
+            result = result + (digit * (data[i] - '0'));
             digit = digit * 10;
         } else
         {
@@ -49,7 +49,7 @@ int intFromString(const char*  data)
     }
 
     return (int)result;
-}
+} // int+
 
 bool boolFromString(const char *data)
 {
@@ -71,7 +71,7 @@ bool boolFromString(const char *data)
         return false;
     }
     else throw WrongUnit();
-} // logic ==
+} // logic+
 
 float floatFromString(const char*  data)
 {
@@ -80,7 +80,6 @@ float floatFromString(const char*  data)
     float _digit = powf(10,-1);
     int dot = -1;
     int count = 0;
-
 
 
     for(int i = ((int)strlen(data) - 1); i >= 0; i--)
@@ -104,7 +103,7 @@ float floatFromString(const char*  data)
         {
             result = result + (digit * float(data[i] - '0'));
             digit = digit * 10;
-        }else if (data [i] != '-')
+        }else if (data [i] == '-')
         {
 
         }else
@@ -115,7 +114,7 @@ float floatFromString(const char*  data)
 
 
 
-    for(int i = dot + 1; i < (int)strlen(data); i++)
+    for(int i = dot + 1; i < (int)strlen(data) - 1; i++)
     {
         if (isdigit(data[i]))
         {
@@ -144,20 +143,19 @@ float floatFromString(const char*  data)
     return result;
 } // float +?
 
+
+
+
 int main()
 {
-    try
-    {
-        try
-        {
-            intFromString("-3123456789");
-        }
-        catch (WrongUnit &e)
+    try {
+        try {
+            intFromString("yu-3123456789");
+        } catch (WrongUnit &e)
         {
             std::cout<<"It's not an int"<< std::endl;
         }
-    }
-    catch (CapacityError &e)
+    }catch (CapacityError &e)
     {
         std::cout << "Too big for int"<< std::endl;
     }
@@ -172,21 +170,14 @@ int main()
         std::cout<<"It's not a bool"<< std::endl;
     }
 
-    
+
     try
     {
-        try
-        {
-            floatFromString("0.1r23");
-        }
-        catch (WrongUnit &e)
-        {
-            std::cout << "It's not a float"<< std::endl;
-        }
+        floatFromString("i0.123");
     }
-    catch (CapacityError &e)
+    catch (WrongUnit &e)
     {
-        std::cout << "Too big for float"<< std::endl;
+        std::cout << "It's not a float"<< std::endl;
     }
 
     return 0;
