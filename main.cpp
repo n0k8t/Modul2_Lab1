@@ -83,7 +83,7 @@ float floatFromString(const char*  data)
 
 
 
-    for(int i = ((int)strlen(data)-1); i >= 0; i--)
+    for(int i = ((int)strlen(data)); i >= 0; i--)
     {
         if (data[i] == '.' || data[i] == ',')
         {
