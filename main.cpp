@@ -150,7 +150,7 @@ int main()
 {
     try {
         try {
-            intFromString("yu-3123456789");
+            intFromString("-3123456789");
         } catch (WrongUnit &e)
         {
             std::cout<<"It's not an int"<< std::endl;
