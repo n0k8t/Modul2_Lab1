@@ -148,16 +148,23 @@ float floatFromString(const char*  data)
 
 int main()
 {
+    intFromString("-00214748364");
+    intFromString("-002147483648");
+    intFromString("002147483647");
+
     try {
-        try {
-            intFromString("-3123456789");
-        } catch (WrongUnit &e)
-        {
-            std::cout<<"It's not an int"<< std::endl;
-        }
-    }catch (CapacityError &e)
-    {
-        std::cout << "Too big for int"<< std::endl;
+        intFromString("-002147483649");
+    }
+    catch (CapacityError &exc) {
+        exc.what();
+        std::cout << "Capacity ERROR"<< std::endl;
+    }
+    try {
+        intFromString("-0021f48364");
+    }
+    catch (WrongUnit &exc) {
+        exc.what();
+        std::cout << "Element ERROR"<< std::endl;
     }
 
 
