@@ -43,7 +43,7 @@ int intFromString(const char*  data)
     if (result > 2147483647)
     {
         throw CapacityError();
-    }else if(result < -2147483647)
+    }else if(result < -2147483648)
     {
         throw CapacityError();
     }
